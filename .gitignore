@@ -1,0 +1,23 @@
+# Project exclude paths
+/vendor
+/node_modules
+/public/thumbs/
+/public/thumbs_old/
+/public/uploads/
+/public/uploads_old/
+/public/test/
+/public/data-site/
+/public/export/
+/public/sitemap.xml
+/public/sitemaps/
+/resources/price.xlsx/
+.env
+.idea/
+.yarn
+/resources/price.xlsx
+/resources/.last_update
+
+# Project exclude paths
+/storage/app/*
+/storage/debugbar/*
+/storage/framework/*

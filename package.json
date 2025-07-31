@@ -1,0 +1,30 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development ./node_modules/webpack/bin/webpack.js --progress --config=./node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "npm run development -- --watch",
+    "watch-poll": "npm run watch -- --watch-poll",
+    "hot": "cross-env NODE_ENV=development ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=./node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production ./node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=./node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "dependencies": {
+    "alpinejs": "^3.12.0",
+    "browser-sync": "^2.26.7",
+    "browser-sync-webpack-plugin": "^2.2.2",
+    "laravel-mix": "^6.0.0",
+    "cross-env": "^6.0.3",
+    "webpack": "^5.0.0",
+    "@fancyapps/ui": "^5.0.36",
+    "focus-visible": "^5.2.0",
+    "inputmask": "^5.0.7",
+    "jquery": "^3.7.1",
+    "vanilla-lazyload": "^17.5.0",
+    "@splidejs/splide": "^4.1.4",
+    "hamburgers": "^1.2.1"
+  },
+  "volta": {
+    "node": "18.17.0"
+  }
+}

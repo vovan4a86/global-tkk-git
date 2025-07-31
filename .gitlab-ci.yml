@@ -1,0 +1,12 @@
+dev:
+  only:
+    - dev
+  image: alpine/curl:8.8.0
+  before_script:
+    - apk add openssh-client
+    - eval $(ssh-agent -s)
+    - echo "$id_rsa_web_www2_fanky" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+  script:
+    - ssh -o StrictHostKeyChecking=no www-data@server2.fanky.ru "cd /var/www/mmo.fanky.ru && git stash && git pull origin dev -f && git stash pop"
