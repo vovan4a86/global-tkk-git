@@ -3485,6 +3485,99 @@ alpineJsInit();
 
 /***/ }),
 
+/***/ "./resources/assets/js--sources/modules/customFront.js":
+/*!*************************************************************!*\
+  !*** ./resources/assets/js--sources/modules/customFront.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   resetForm: () => (/* binding */ resetForm),
+/* harmony export */   sendAjax: () => (/* binding */ sendAjax),
+/* harmony export */   sendFiles: () => (/* binding */ sendFiles),
+/* harmony export */   sendForms: () => (/* binding */ sendForms)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
+var sendAjax = function sendAjax(url, data, callback, type) {
+  data = data || {};
+  if (typeof type == 'undefined') type = 'json';
+  jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+    type: 'post',
+    url: url,
+    data: data,
+    dataType: type,
+    beforeSend: function beforeSend(request) {
+      return request.setRequestHeader('X-CSRF-Token', jquery__WEBPACK_IMPORTED_MODULE_0___default()("meta[name='csrf-token']").attr('content'));
+    },
+    success: function success(json) {
+      if (typeof callback == 'function') {
+        callback(json);
+      }
+    },
+    error: function error(XMLHttpRequest, textStatus, errorThrown) {
+      alert('Не удалось выполнить запрос! Ошибка на сервере.');
+      console.log(errorThrown);
+    }
+  });
+};
+var sendFiles = function sendFiles(url, data, callback, type) {
+  if (typeof type == 'undefined') type = 'json';
+  jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+    url: url,
+    type: 'POST',
+    data: data,
+    cache: false,
+    dataType: type,
+    processData: false,
+    // Don't process the files
+    contentType: false,
+    // Set content type to false as jQuery will tell the server its a query string request
+    beforeSend: function beforeSend(request) {
+      return request.setRequestHeader('X-CSRF-Token', jquery__WEBPACK_IMPORTED_MODULE_0___default()("meta[name='csrf-token']").attr('content'));
+    },
+    success: function success(json, textStatus, jqXHR) {
+      if (typeof callback == 'function') {
+        callback(json);
+      }
+    },
+    error: function error(jqXHR, textStatus, errorThrown) {
+      alert('Не удалось выполнить запрос! Ошибка на сервере.');
+    }
+  });
+};
+var resetForm = function resetForm(form) {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(form).trigger('reset');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(form).find('.err-msg-block').remove();
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(form).find('.has-error').remove();
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(form).find('.invalid').attr('title', '').removeClass('invalid');
+}; //Заказать звонок,  Вопрос, Заявка
+
+var sendForms = function sendForms() {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#calc').submit(function (e) {
+    e.preventDefault();
+    var form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    var url = jquery__WEBPACK_IMPORTED_MODULE_0___default()(form).attr('action');
+    var data = jquery__WEBPACK_IMPORTED_MODULE_0___default()(form).serialize();
+    sendAjax(url, data, function (json) {
+      if (json.success) {
+        resetForm(form);
+        alert('Ваш запрос отправлен!');
+      }
+
+      if (json.errors) {
+        console.error(json.errors);
+      }
+    });
+  });
+};
+sendForms();
+
+/***/ }),
+
 /***/ "./resources/assets/js--sources/modules/index.js":
 /*!*******************************************************!*\
   !*** ./resources/assets/js--sources/modules/index.js ***!
@@ -3500,6 +3593,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tables__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_tables__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _truncateText__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./truncateText */ "./resources/assets/js--sources/modules/truncateText.js");
 /* harmony import */ var _popups__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./popups */ "./resources/assets/js--sources/modules/popups.js");
+/* harmony import */ var _customFront__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./customFront */ "./resources/assets/js--sources/modules/customFront.js");
+
 
 
 

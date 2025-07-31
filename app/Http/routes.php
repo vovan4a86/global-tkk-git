@@ -1,6 +1,15 @@
 <?php
 
+use App\Http\Controllers\AjaxController;
+
 Route::get('robots.txt', 'PageController@robots')->name('robots');
+
+Route::group(
+    ['prefix' => 'ajax', 'as' => 'ajax.'],
+    function () {
+        Route::post('calc', [AjaxController::class, 'postCalc'])->name('calc');
+    }
+);
 
 Route::group(['middleware' => ['redirects']], function() {
     Route::get('/', ['as' => 'main', 'uses' => 'WelcomeController@index']);

@@ -51,11 +51,7 @@ class Feedback extends Model {
 	];
 
 	public static $types = array(
-        1 => 'Бесплатный расчет',
-        2 => 'Обратный звонок',
-        3 => 'Вопрос',
-        4 => 'Вызов замерщика',
-        5 => 'Заявка на расчёт',
+        1 => 'Расчёт стоимости',
     );
 
     private static $fields = [

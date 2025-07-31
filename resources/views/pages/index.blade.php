@@ -159,220 +159,142 @@
                 </div>
             </section>
         @endif
-        <!--section.s-about-->
-        <section class="s-about" id="okompanii">
-            <div class="s-about__bg lazy" data-bg="/static/images/common/about-bg.jpg"></div>
-            <div class="s-about__container container">
-                <div class="s-about__wrapper">
-                    <div class="s-about__content text-block">
-                        <h2 class="h2" style="text-align: center">О нас</h2>
-                        <p>GLOBAL LOGISTIC успешно осуществляет деятельность по транспортировке грузов на различные
-                            направления по территории России, стран СНГ и Китая.</p>
-                        <p>В числе наших клиентов крупные отечественные производственные и торговые предприятия.</p>
-                        <p>Наша компания осуществляет полный комплекс мультимодальных перевозок, сочетая перевозки
-                            железнодорожным, морским и автомобильным транспортом в единую, эффективную схему доставки
-                            груза по всему миру.</p>
-                        <p>За годы успешной работы был накоплен профессиональный багаж знаний для решения самых сложных
-                            задач связанных с доставкой различных типов грузов в междугороднем и международном
-                            сообщении</p>
-                        <div class="s-about__actions">
-                            <a class="button bounce" href="tel:+73437770065" title="Позвонить">Связаться</a>
+
+        @if(isset($main_about) && $main_about)
+            <section class="s-about" id="okompanii">
+                <div class="s-about__bg lazy" data-bg="/static/images/common/about-bg.jpg"></div>
+                <div class="s-about__container container">
+                    <div class="s-about__wrapper">
+                        <div class="s-about__content text-block">
+                            {!! $main_about['text'] !!}
+                            @if($main_about['btn_name'] && $main_about['phone'])
+                                <div class="s-about__actions">
+                                    <a class="button bounce"
+                                       href="tel:{{ SiteHelper::clearPhone($main_about['phone']) }}"
+                                       title="{{ $main_about['btn_name'] }}">{{ $main_about['btn_name'] }}</a>
+                                </div>
+                            @endif
                         </div>
                     </div>
+                    @if($main_about['image'])
+                        <div class="s-about__view">
+                            <img class="s-about__img" src="{{ S::fileSrc($main_about['image']) }}" width="550"
+                                 height="550" alt="О нас" loading="lazy"/>
+                        </div>
+                    @endif
                 </div>
-                <div class="s-about__view">
-                    <img class="s-about__img" src="/static/images/common/about-view.jpg" width="550" height="550"
-                         alt="О нас" loading="lazy"/>
-                </div>
-            </div>
-        </section>
+            </section>
+        @endif
         <!--section.s-text-->
         <section class="s-text">
             <div class="s-text__container container">
-                <div class="s-text__grid">
-                    <div class="s-text__item">
-                        <p>Контейнерные перевозки</p>
+                @if($uslugi = S::get('main_before_why'))
+                    <div class="s-text__grid">
+                        @foreach($uslugi as $item)
+                            <div class="s-text__item">
+                                <p>{{ $item }}</p>
+                            </div>
+                        @endforeach
                     </div>
-                    <div class="s-text__item">
-                        <p>Морские перевозки</p>
-                    </div>
-                    <div class="s-text__item">
-                        <p>Авиаперевозки</p>
-                    </div>
-                    <div class="s-text__item">
-                        <p>Таможенное оформление</p>
-                    </div>
-                </div>
+                @endif
                 <div class="s-text__body text-block">
-                    <h3 class="h3">Почему именно мы?</h3>
-                    <div class="s-text__columns">
-                        <div class="s-text__col text-block">
-                            <h4 class="h4">Профессионализм</h4>
-                            <p>— Перевозки любой сложности.</p>
-                            <p>— Возможность разработки специальных решений для новых нестандартных задач.</p>
-                            <p>— Полный комплекс услуг перевозки грузов</p>
+                    @if($title = S::get('main_why_header'))
+                        <h3 class="h3">{{ $title }}</h3>
+                    @endif
+                    @if($why_items = S::get('main_why'))
+                        <div class="s-text__columns">
+                            @foreach($why_items as $why_item)
+                                <div class="s-text__col text-block">
+                                    @if($why_item['title'])
+                                        <h4 class="h4">{{ $why_item['title'] }}</h4>
+                                    @endif
+                                    @if($why_item['text'])
+                                        {!! $why_item['text'] !!}
+                                    @endif
+                                </div>
+                            @endforeach
                         </div>
-                        <div class="s-text__col text-block">
-                            <h4 class="h4">Выгода</h4>
-                            <p>— Подбор для клиента оптимального маршрута по срокам и стоимости доставки.</p>
-                            <p>— Находим самые лучшие решения по перевозке грузов, что позволяет экономить деньги нашим
-                                клиентам</p>
-                        </div>
-                        <div class="s-text__col text-block">
-                            <h4 class="h4">Подход</h4>
-                            <p>— Поддержка персонального менеджера 24/7 для каждого клиента</p>
-                            <p>— Уважаем интересы и время наших клиентов</p>
-                        </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </section>
-        <!--section.s-brand-->
-        <section class="s-brand">
-            <div class="s-brand__container container container--wide">
-                <div class="s-brand__container container">
-                    <div class="s-brand__grid">
-                        <div class="s-brand__text text-block">
-                            <h2 class="h3">Компания GLOBAL LOGISTIC</h2>
-                            <p>Оказываем полный комплекс транспортно-экспедиционных услуг по&nbsp;перевозке грузов
-                                морским, автомобильным, железнодорожным и&nbsp;воздушным транспортом в&nbsp;междугороднем
-                                и&nbsp;международном сообщении, с&nbsp;оказанием полного спектра терминально-складских
-                                услуг</p>
-                        </div>
-                        <div class="s-brand__view">
-                            <img class="s-brand__img" src="/static/images/common/brand.jpg" width="800" height="400"
-                                 alt="Компания GLOBAL LOGISTIC" loading="lazy"/>
+        @if(isset($main_brand) && $main_brand)
+            <section class="s-brand">
+                <div class="s-brand__container container container--wide">
+                    <div class="s-brand__container container">
+                        <div class="s-brand__grid">
+                            <div class="s-brand__text text-block">
+                                @if($main_brand['title'])
+                                    <h2 class="h3">{{ $main_brand['title'] }}</h2>
+                                @endif
+                                @if($main_brand['text'])
+                                    {!! $main_brand['text'] !!}
+                                @endif
+                            </div>
+                            <div class="s-brand__view">
+                                @if($main_brand['image'])
+                                    <img class="s-brand__img" src="{{ S::fileSrc($main_brand['image']) }}"
+                                         width="800" height="400" alt="Компания GLOBAL LOGISTIC" loading="lazy"/>
+                                @endif
+                            </div>
+
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!--section.s-trans-->
-        <section class="s-trans">
-            <div class="s-trans__bg lazy" data-bg="/static/images/common/about-bg.jpg"></div>
-            <div class="s-trans__container container">
-                <div class="s-trans__grid">
-                    <div class="s-trans__view">
-                        <img class="s-trans__img" src="/static/images/common/transport.jpg" width="610" height="610"
-                             alt="Ж/Д перевозки" loading="lazy"/>
-                    </div>
-                    <div class="s-trans__body text-block">
-                        <h2 class="h3" style="text-align:center">Ж/Д перевозки</h2>
-                        <p>Мы на выгодных условиях организуем ж/д перевозки. Этот способ доставки востребован по причине
-                            финансовой выгоды и эффективности на дальних расстояниях.</p>
-                        <p>На территории России железнодорожные перевозки грузов играют особую роль в развитии
-                            экономики. Это обусловлено удаленностью многих производственных организаций и добывающих
-                            предприятий от рынка сбыта, и развитостью железнодорожной сети. Впрочем,
-                            этот способ доставки подходит не только для отправки крупных партий продукции от одного
-                            заказчика, но и для сборных грузов от нескольких клиентов.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--section.s-faq-->
-        <section class="s-faq">
-            <div class="s-faq__bg lazy" data-bg="/static/images/common/about-bg.jpg"></div>
-            <div class="s-faq__container container container--wide">
-                <div class="s-faq__container container">
-                    <div class="s-faq__head text-block">
-                        <h2 class="h2">Часто задаваемые вопросы:</h2>
-                    </div>
-                    <div class="s-faq__list">
-                        <div class="s-faq__item" x-data="{ isOpen: false }">
-                            <button class="s-faq__button btn-reset" type="button" aria-label="Открыть / закрыть вопрос"
-                                    @click="isOpen = !isOpen" :class="isOpen &amp;&amp; 'is-active'">
-                                <svg class="svg-sprite-icon icon-caret" width="1em" height="1em">
-                                    <use xlink:href="/static/images/sprite/symbol/sprite.svg#caret"></use>
-                                </svg>
-                                Обязательна ли услуга обрешётки?
-                            </button>
-                            <div class="s-faq__answer text-block" x-show="isOpen" x-transition="">
-                                <p>Обрешетка или деревянный каркас — жесткая упаковка из деревянных брусков и досок для
-                                    минимизации повреждений грузов. Защищает от любых механических воздействий,
-                                    предотвращает соприкосновение с другими грузами или стенками транспортного
-                                    средства.</p>
-                                <p>Применяется для особо ценных грузов и хрупких грузов. Определенные типы грузов
-                                    принимаются к перевозке только при условии наличия обрешетки.</p>
-                            </div>
+            </section>
+        @endif
+        @if(isset($main_trans) && $main_trans)
+            <section class="s-trans">
+                <div class="s-trans__bg lazy" data-bg="/static/images/common/about-bg.jpg"></div>
+                <div class="s-trans__container container">
+                    <div class="s-trans__grid">
+                        <div class="s-trans__view">
+                            @if($main_trans['image'])
+                                <img class="s-trans__img" src="{{ S::fileSrc($main_trans['image']) }}"
+                                     width="610" height="610" alt="Ж/Д перевозки" loading="lazy"/>
+                            @endif
                         </div>
-                        <div class="s-faq__item" x-data="{ isOpen: false }">
-                            <button class="s-faq__button btn-reset" type="button" aria-label="Открыть / закрыть вопрос"
-                                    @click="isOpen = !isOpen" :class="isOpen &amp;&amp; 'is-active'">
-                                <svg class="svg-sprite-icon icon-caret" width="1em" height="1em">
-                                    <use xlink:href="/static/images/sprite/symbol/sprite.svg#caret"></use>
-                                </svg>
-                                В чем отличие морского контейнера от железнодорожного?
-                            </button>
-                            <div class="s-faq__answer text-block" x-show="isOpen" x-transition="">
-                                <p>Главное отличие морского контейнера от железнодорожного – стоимость изготовления.
-                                    Боксы для наземных перевозок стоят ощутимо дешевле из-за применения более тонкого
-                                    металла и традиционного лакокрасочного покрытия.</p>
-                                <p>Также железнодорожная тара характеризуется меньшими размерами и
-                                    грузоподъемностью.</p>
-                                <p>Водные контейнеры более герметичны, прочны, срок их эксплуатации в среднем выше на 5
-                                    лет.</p>
-                                <p>Выбор тары зависит от маршрута и дальности перевозок, типа и количества багажа. Для
-                                    насыпных товаров требуется вертикальная загрузка, следовательно, необходима
-                                    герметичная конструкция со съемной или натяжной крышей. Машины и крупные механизмы
-                                    проще перемещать на контейнерных модулях FlatRack – платформах с торцевыми стенками,
-                                    которые применяются именно в железнодорожных перевозках. Высокие грузы перевозят в
-                                    боксах с открытым верхом.</p>
-                            </div>
-                        </div>
-                        <div class="s-faq__item" x-data="{ isOpen: false }">
-                            <button class="s-faq__button btn-reset" type="button" aria-label="Открыть / закрыть вопрос"
-                                    @click="isOpen = !isOpen" :class="isOpen &amp;&amp; 'is-active'">
-                                <svg class="svg-sprite-icon icon-caret" width="1em" height="1em">
-                                    <use xlink:href="/static/images/sprite/symbol/sprite.svg#caret"></use>
-                                </svg>
-                                Какой контейнер выбрать ? Морской или железнодорожный?
-                            </button>
-                            <div class="s-faq__answer text-block" x-show="isOpen" x-transition="">
-                                <p>Если вы перевозите небольшой груз только в пределах одного региона или страны –
-                                    выбирайте железнодорожный контейнер.</p>
-                                <p>Если, ваш груз выходит за пределы объёма 5 тонн, и вы планируете доставлять груз как,
-                                    по наземному сообщению, так и через море – выбирайте морской контейнер. Его можно
-                                    использовать при передвижении по железной дороге.</p>
-                            </div>
-                        </div>
-                        <div class="s-faq__item" x-data="{ isOpen: false }">
-                            <button class="s-faq__button btn-reset" type="button" aria-label="Открыть / закрыть вопрос"
-                                    @click="isOpen = !isOpen" :class="isOpen &amp;&amp; 'is-active'">
-                                <svg class="svg-sprite-icon icon-caret" width="1em" height="1em">
-                                    <use xlink:href="/static/images/sprite/symbol/sprite.svg#caret"></use>
-                                </svg>
-                                Сколько паллет входит в контейнер?
-                            </button>
-                            <div class="s-faq__answer text-block" x-show="isOpen" x-transition="">
-                                <p>В один сухогрузный контейнер входит:</p>
-                                <ul>
-                                    <li>11 европаллет</li>
-                                    <li>9 или 10 поддонов типа FIN (количество зависит от выбранной схемы размещения в
-                                        контейнере)
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="s-faq__item" x-data="{ isOpen: false }">
-                            <button class="s-faq__button btn-reset" type="button" aria-label="Открыть / закрыть вопрос"
-                                    @click="isOpen = !isOpen" :class="isOpen &amp;&amp; 'is-active'">
-                                <svg class="svg-sprite-icon icon-caret" width="1em" height="1em">
-                                    <use xlink:href="/static/images/sprite/symbol/sprite.svg#caret"></use>
-                                </svg>
-                                Какая стоимость грузоперевозки?
-                            </button>
-                            <div class="s-faq__answer text-block" x-show="isOpen" x-transition="">
-                                <p>Стоимость грузоперевозки рассчитывается индивидуально, в зависимости от километража
-                                    доставки, а также его параметров: массы, габаритов.</p>
-                                <p>Для расчета просим связаться с нами по телефону:&nbsp;
-                                    <a href="tel:+73437770065">+7 (343) 777-00-65</a>
-                                </p>
-                            </div>
+                        <div class="s-trans__body text-block">
+                            @if($main_trans['title'])
+                                <h2 class="h3" style="text-align:center">{{ $main_trans['title'] }}</h2>
+                            @endif
+                            @if($main_trans['text'])
+                                {!! $main_trans['text'] !!}
+                            @endif
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        @endif
+        @if(isset($main_faq) && count($main_faq))
+            <section class="s-faq">
+                <div class="s-faq__bg lazy" data-bg="/static/images/common/about-bg.jpg"></div>
+                <div class="s-faq__container container container--wide">
+                    <div class="s-faq__container container">
+                        <div class="s-faq__head text-block">
+                            <h2 class="h2">Часто задаваемые вопросы:</h2>
+                        </div>
+                        <div class="s-faq__list">
+                            @foreach($main_faq as $item)
+                                <div class="s-faq__item" x-data="{ isOpen: false }">
+                                    <button class="s-faq__button btn-reset" type="button"
+                                            aria-label="Открыть / закрыть вопрос"
+                                            @click="isOpen = !isOpen" :class="isOpen &amp;&amp; 'is-active'">
+                                        <svg class="svg-sprite-icon icon-caret" width="1em" height="1em">
+                                            <use xlink:href="/static/images/sprite/symbol/sprite.svg#caret"></use>
+                                        </svg>
+                                        {{ $item['title'] }}
+                                    </button>
+                                    <div class="s-faq__answer text-block" x-show="isOpen" x-transition="">
+                                        {!! $item['text'] !!}
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </section>
+        @endif
         <!--section.s-form-->
         <section class="s-form">
             <div class="s-form__container container">
@@ -382,7 +304,7 @@
                 </div>
                 <div class="s-form__form">
                     <!--form.form(action="#")-->
-                    <form class="form" action="#">
+                    <form class="form" id="calc" action="{{ route('ajax.calc') }}">
                         <div class="form__wrapper">
                             <div class="form__head">
                                 <div class="form__title">Расчёт стоимости</div>
@@ -403,7 +325,7 @@
                                 </label>
                                 <label class="form__field">
                                     <span class="form__field-label">Ваш запрос</span>
-                                    <textarea class="form__input" name="message" rows="3"></textarea>
+                                    <textarea class="form__input" name="text" rows="3"></textarea>
                                 </label>
                             </div>
                             <div class="form__actions">
