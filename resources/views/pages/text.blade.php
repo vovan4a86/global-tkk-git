@@ -1,22 +1,12 @@
 @extends('template')
 @section('content')
-    <div class="layout body-content">
-        @include('blocks.bread')
-        <div class="layout__container container">
-            <div class="layout__heading">
-                <div class="title">{{ $h1 ?? '' }}</div>
+    @include('blocks.bread')
+    <main>
+        <section class="text page">
+            <div class="text__container container text-block">
+                <h1 class="h1">{{ $h1 ?? '' }}</h1>
+                {!! $text !!}
             </div>
-        </div>
-        <main>
-            <div class="container">
-                <div class="layout layout--brands">
-                    <div class="layout__grid">
-                        <div class="layout__content text-block">
-                            {!! $text !!}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
+        </section>
+    </main>
 @stop
